@@ -1,0 +1,78 @@
+# ----------------------------
+# Build outputs
+# ----------------------------
+*.exe
+*.out
+*.o
+*.obj
+*.dll
+*.lib
+*.a
+*.so
+*.dylib
+*.pdb
+*.ilk
+
+# ----------------------------
+# C / C++ temporary files
+# ----------------------------
+*.gcda
+*.gcno
+*.gcov
+*.stackdump
+
+# ----------------------------
+# Emscripten temporary/debug files
+# ----------------------------
+*.wasm.map
+*.js.symbols
+
+# Keep the generated WebAssembly app files
+# Do NOT ignore:
+# web/truss_solver.js
+# web/truss_solver.wasm
+
+# ----------------------------
+# Python virtual environments / cache
+# ----------------------------
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# ----------------------------
+# Editor / IDE files
+# ----------------------------
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# ----------------------------
+# OS files
+# ----------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ----------------------------
+# Logs
+# ----------------------------
+*.log
+
+# ----------------------------
+# Local test/debug executables
+# ----------------------------
+triangle_debug*
+triangle_no_support*
+main_triangle_debug.exe
+main_triangle_no_support.exe
+
+# ----------------------------
+# Temporary files
+# ----------------------------
+*.tmp
+*.bak
+*.swp

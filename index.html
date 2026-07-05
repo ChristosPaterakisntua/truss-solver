@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Truss Solver</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Truss Solver</h1>
+    <p>Design nodes, members, loads, and supports, then feed the model into the solver.</p>
+  </header>
+
+  <main class="app">
+    <aside class="panel left-panel">
+      <div class="section">
+        <h2>Εργαλεία</h2>
+        <div class="toolbar">
+          <div class="toolbar-row">
+            <button id="btn-add-node" type="button">Add Node</button>
+            <button id="btn-add-bar" type="button">Add Bar</button>
+          </div>
+          <div class="toolbar-row">
+            <button id="btn-pan" type="button">Pan / Navigate</button>
+            <button id="btn-undo" type="button">Undo</button>
+          </div>
+          <div class="toolbar-row">
+            <button id="btn-solve" type="button" class="primary">Solve</button>
+            <button id="btn-clear" type="button" class="danger">Clear</button>
+          </div>
+          <div class="toolbar-row">
+            <button id="btn-zoom-in" type="button">Zoom In</button>
+            <button id="btn-zoom-out" type="button">Zoom Out</button>
+            <button id="btn-reset-view" type="button">Reset View</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Force</h2>
+        <div class="form-grid">
+          <div>
+            <label for="input-force-node-id">Node ID</label>
+            <input id="input-force-node-id" type="number" min="1" placeholder="eg 7" />
+          </div>
+          <div>
+            <label for="input-force-magnitude">Magnitude</label>
+            <input id="input-force-magnitude" type="number" step="0.001" placeholder="eg 1.0" />
+          </div>
+          <div>
+            <label for="input-force-angle-deg">Angle (deg)</label>
+            <input id="input-force-angle-deg" type="number" step="0.001" placeholder="eg 270" />
+          </div>
+
+          <button id="btn-apply-force" type="button" class="primary">Apply Force</button>
+        </div>
+        <p class="hint">Enter the data and press Apply Force.</p>
+      </div>
+
+      <div class="section">
+        <h2>Support</h2>
+        <div class="form-grid">
+          <div>
+            <label for="input-support-node-id">Node ID</label>
+            <input id="input-support-node-id" type="number" min="1" placeholder="eg 1" />
+          </div>
+          <div>
+            <label for="select-support-type">Type</label>
+            <select id="select-support-type">
+              <option value="roller">roller</option>
+              <option value="pin">pin</option>
+            </select>
+          </div>
+          <div>
+            <label for="input-support-angle-deg">Angle θ (deg)</label>
+            <input id="input-support-angle-deg" type="number" step="0.001" value="0" />
+          </div>
+
+          <button id="btn-apply-support" type="button" class="primary">Apply Support</button>
+        </div>
+        <p class="hint">For pin: two reactions at angles θ and θ + 90°. For roller: one reaction perpendicular to the support.</p>
+      </div>
+    </aside>
+
+    <section class="panel center">
+      <div class="canvas-toolbar">
+        <span class="hint">Canvas: click to place nodes in Add Node mode. In Add Bar mode, click two nodes.</span>
+      </div>
+      <div class="canvas-wrap" id="canvas-wrap">
+        <svg id="truss-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet" aria-label="Truss drawing canvas">
+          <defs>
+            <marker
+              id="arrowhead"
+              markerWidth="12"
+              markerHeight="12"
+              refX="10"
+              refY="6"
+              orient="auto"
+              markerUnits="strokeWidth"
+            >
+              <path d="M 0 0 L 12 6 L 0 12 z" fill="#fbbf24"></path>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </section>
+
+    <aside class="panel right-panel">
+      <div class="section">
+        <h2>Results</h2>
+        <div class="results-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody id="results-table-body">
+              <tr>
+                <td colspan="4" class="empty">No results yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <div class="status" id="status-bar" data-kind="info">Loading...</div>
+
+  <script src="web/truss_solver.js"></script>
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const forceInputs = {
+        node: document.getElementById('input-force-node-id'),
+        mag: document.getElementById('input-force-magnitude'),
+        ang: document.getElementById('input-force-angle-deg'),
+      };
+
+      const supportInputs = {
+        node: document.getElementById('input-support-node-id'),
+        type: document.getElementById('select-support-type'),
+        ang: document.getElementById('input-support-angle-deg'),
+      };
+
+      function submitForce() {
+        if (!window.TrussApp) return;
+        window.TrussApp.addForce(
+          forceInputs.node.value,
+          forceInputs.mag.value,
+          forceInputs.ang.value
+        );
+      }
+
+      function submitSupport() {
+        if (!window.TrussApp) return;
+        window.TrussApp.addSupport(
+          supportInputs.node.value,
+          supportInputs.type.value,
+          supportInputs.ang.value
+        );
+      }
+
+      const btnForce = document.getElementById('btn-apply-force');
+      btnForce.addEventListener('click', submitForce);
+
+      const btnSupport = document.getElementById('btn-apply-support');
+      btnSupport.addEventListener('click', submitSupport);
+    });
+  </script>
+</body>
+</html>
