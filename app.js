@@ -605,10 +605,10 @@
 
     if (left !== right) {
       if (left < right) {
-        return `The carrier is not isostatic or is inadequately supported: m + r = ${left}, ενώ 2j = ${right}. Λείπουν ${right - left} άγνωστες ράβδοι/αντιδράσεις.`;
+        return `The carrier is not isostatic or is inadequately supported: m + r = ${left}, while 2j = ${right}. Missing ${right - left} unknown bars/reactions.`;
       }
 
-      return `The vector is hyperstatic for this solver: m + r = ${left}, ενώ 2j = ${right}. Περισσεύουν ${left - right} άγνωστες.`;
+      return `The vector is hyperstatic for this solver: m + r = ${left}, while 2j = ${right}. ${left - right} leftover unkown.`;
     }
 
     return null;
