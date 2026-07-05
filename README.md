@@ -9,9 +9,10 @@ The application allows users to create a planar truss structure by adding nodes,
 
 The app runs directly in the browser through a local server.
 
+```bash
 python -m http.server 8000
 Then open: http://localhost:8000
-
+```
 
 ## Features
 
