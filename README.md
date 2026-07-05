@@ -43,6 +43,7 @@ HTML / CSS for the user interface
 
 ## Project Structure
 
+```text
 truss-solver/
 │
 ├── index.html
@@ -72,6 +73,7 @@ truss-solver/
 ├── README.md
 ├── LICENSE
 └── .gitignore
+```
 
 
 ## How It Works
@@ -273,9 +275,10 @@ m + r = 3
 
 The structure is unsupported and cannot be solved as a static truss.
 
-## Screenshot
+## Screenshots
 
-![Truss Solver Demo](assets/demo.png)
+![Truss Solver Demo 1](assets/demo1.png)
+![Truss Solver Demo 2](assets/demo2.png)
 
 
 ## Development Notes
