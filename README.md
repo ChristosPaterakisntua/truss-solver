@@ -97,9 +97,9 @@ For a planar statically determinate truss, the basic isostatic condition is:
 m + r = 2j
 
 where:
-m = number of bars
-r = number of support reactions
-j = number of joints/nodes
+- m = number of bars
+- r = number of support reactions
+- j = number of joints/nodes
 
 The solver uses this condition to reject structures that are not statically determinate.
 
@@ -166,19 +166,27 @@ https://emscripten.org/docs/getting_started/downloads.html
 
 After installing Emscripten, clone this repository and go to the project root:
 
+```bash
 git clone https://github.com/ChristosPaterakisntua/truss-solver.git  
 cd truss-solver
+```
 
 ### Windows
 
 Activate Emscripten from your local emsdk installation folder:
+
+```bash
 cd path\to\emsdk
 emsdk_env.bat
+```
 
 Then return to the project folder:
+```bash
 cd path\to\truss-solver
+```
 
 Build the WebAssembly module:
+```bash
 em++ -std=c++17 -O2 ^
 -lembind ^
 -fexceptions ^
@@ -192,6 +200,7 @@ solver\Graph.cpp ^
 solver\TrussSolver.cpp ^
 solver\bindings.cpp ^
 -o web\truss_solver.js
+```
 
 This generates:
 web/truss_solver.js
@@ -200,13 +209,19 @@ web/truss_solver.wasm
 ### Linux / macOS
 
 Activate Emscripten from your local emsdk installation folder:
+
+```bash
 cd path/to/emsdk
 source ./emsdk_env.sh
+```
 
 Then return to the project folder:
+```bash
 cd path/to/truss-solver
+```
 
 Build the WebAssembly module:
+```bash
 em++ -std=c++17 -O2 \
 -lembind \
 -fexceptions \
@@ -220,6 +235,7 @@ solver/Graph.cpp \
 solver/TrussSolver.cpp \
 solver/bindings.cpp \
 -o web/truss_solver.js
+```
 
 This generates:
 web/truss_solver.js
@@ -230,15 +246,21 @@ web/truss_solver.wasm
 
 After building the WebAssembly files, start a local server from the project root:
 
+```bash
 python -m http.server 8000
+```
 
 Then open:
+```bash
 http://localhost:8000
+```
 
 A local server is required because browsers usually do not load WebAssembly correctly when opening index.html directly from the file system.
 
 If you are using Python 2, use:
+```bash
 python -m SimpleHTTPServer 8000
+```
 
 
 ## Example Valid Model
