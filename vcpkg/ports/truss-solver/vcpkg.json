@@ -1,0 +1,8 @@
+{
+  "name": "truss-solver",
+  "version": "1.0.0",
+  "description": "2D planar truss solver library (with optional WebAssembly bindings).",
+  "homepage": "https://github.com/ChristosPaterakisntua/truss-solver",
+  "license": "MIT",
+  "supports": "native"
+}
