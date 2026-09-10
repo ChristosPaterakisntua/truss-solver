@@ -1,6 +1,9 @@
 # ----------------------------
 # Build outputs
 # ----------------------------
+build/
+build-wasm/
+_install/
 *.exe
 *.out
 *.o

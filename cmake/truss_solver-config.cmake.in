@@ -1,0 +1,9 @@
+@PACKAGE_INIT@
+
+# Load the installed target metadata (truss_solverTargets.cmake), which
+# provides the imported target `truss_solver::truss_solver` together with its
+# inter-face include directories and usage requirements.
+include("${CMAKE_CURRENT_LIST_DIR}/truss_solverTargets.cmake")
+
+# Fails if the consumer asked for a required component that we do not provide.
+check_required_components(truss_solver)
